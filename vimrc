@@ -10,8 +10,6 @@ call vundle#rc()
 " required!
 Bundle 'gmarik/vundle'
 
-" ... register Vundle bundles
-Bundle 'tobyS/vimtip'
 " Display trailing whitespaces
 Bundle 'jakobwesthoff/whitespacetrail'
 " Fancy snippet machine
@@ -169,18 +167,6 @@ autocmd BufRead *.html.twig set filetype=htmltwig
 " Handle *.phps as PHP files
 au BufRead,BufNewFile *.phps		set filetype=php
 
-" VIMTips
-let g:vimtip_tips = []
-call add(g:vimtip_tips, "Easy motion with <,><w>")
-call add(g:vimtip_tips, "Register <*> is middle mouse clipboard")
-call add(g:vimtip_tips, "Jump to matching brace: <%>")
-call add(g:vimtip_tips, "Re-indent code: <=>")
-call add(g:vimtip_tips, "Indent inner / outer block: >iB / >aB")
-call add(g:vimtip_tips, ":r <file> paste the given file at the current position")
-
-autocmd VimEnter * call vimtip#NextTip()
-autocmd WinEnter * call vimtip#NextTip()
-
 " Undo history between sessions
 set undodir=~/.vim/undodir
 set undofile
@@ -225,13 +211,3 @@ nnoremap <buffer> <C-p> :call pdv#DocumentWithSnip()<CR>
 
 " Remap leader for easy motion
 let g:EasyMotion_leader_key = '<Leader>'
-
-" Highlight extra whitespace at line endings
-highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-autocmd BufWinLeave * call clearmatches()
-
-set formatoptions-=w
