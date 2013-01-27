@@ -186,7 +186,7 @@ let g:UltiSnipsSnippetsDir = $HOME . "/.vim/snippets/"
 let g:UltiSnipsSnippetDirectories = ["snippets"]
 
 " Configure PDV
-let g:pdv_template_dir = $HOME . "/.vim/bundle/pdv/templates_snip"
+let g:pdv_template_dir = $HOME . "/.vim/config/pdv/templates"
 nnoremap <C-p> :call pdv#DocumentWithSnip()<CR>
 
 " Remap leader for easy motion
