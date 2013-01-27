@@ -32,32 +32,12 @@ Bundle "Lokaltog/vim-easymotion"
 " Testing framework for VIM scripts
 Bundle "runVimTests"
 
+" PHP Documenting Bundle
 Bundle "tobyS/pdv"
+
+" Provides file skeletons
 Bundle "tobyS/vmustache"
 Bundle "tobyS/skeletons.vim"
-
-" Approximate colorschemes
-" Seems to be not needed
-" Bundle 'godlygeek/csapprox'
-
-" Autocompletion of everything
-" TODO: Configure completely
-"Bundle 'ervandew/supertab'
-
-""""""""""""
-" Trying ...
-""""""""""""
-
-" Git integration
-Bundle 'tpope/vim-fugitive'
-" Rewrap argument lists
-Bundle 'jakobwesthoff/argumentrewrap'
-" Re-indents pasted code
-Bundle 'sickill/vim-pasta'
-" Easy motion using <leader><leader><motion>
-Bundle 'Lokaltog/vim-easymotion'
-" Make ',' an object
-Bundle 'austintaylor/vim-commaobject'
 
 " Required after Vundle did its job.
 filetype plugin indent on     " required!
