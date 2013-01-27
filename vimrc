@@ -34,10 +34,9 @@ Bundle "Lokaltog/vim-easymotion"
 " Testing framework for VIM scripts
 Bundle "runVimTests"
 
-" Local development
-Bundle "/home/dotxp/dev/VIM/pdv.git"
-Bundle "/home/dotxp/dev/VIM/vmustache.git"
-Bundle "/home/dotxp/dev/VIM/skeletons.git"
+Bundle "tobyS/pdv"
+Bundle "tobyS/vmustache"
+Bundle "tobyS/skeletons.vim"
 
 " Approximate colorschemes
 " Seems to be not needed
