@@ -115,7 +115,7 @@ autocmd InsertEnter * set cursorline
 set visualbell
 set t_vb=
 set ttyfast
-set ruler
+set noruler
 set laststatus=2
 
 " Repair wired terminal/vim settings
@@ -132,6 +132,8 @@ set t_Co=256
 
 syntax enable
 " let g:solarized_termcolors=256
+se t_Co=16
+set background=light
 colorscheme solarized
 
 filetype plugin on
@@ -224,3 +226,13 @@ nnoremap <buffer> <C-p> :call pdv#DocumentWithSnip()<CR>
 
 " Remap leader for easy motion
 let g:EasyMotion_leader_key = '<Leader>'
+
+" Highlight extra whitespace at line endings
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+
+set formatoptions-=w
