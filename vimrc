@@ -26,8 +26,6 @@ Bundle "altercation/vim-colors-solarized"
 Bundle "danro/rename.vim"
 " XML editing
 Bundle "sukima/xmledit"
-" Easy motion using <Leader><w>
-Bundle "Lokaltog/vim-easymotion"
 
 " Testing framework for VIM scripts
 Bundle "runVimTests"
