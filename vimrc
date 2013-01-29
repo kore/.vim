@@ -28,6 +28,8 @@ Bundle "altercation/vim-colors-solarized"
 Bundle "tpope/vim-eunuch"
 " XML editing
 Bundle "sukima/xmledit"
+" Insert mode autocomplete management
+Bundle "ervandew/supertab"
 
 " Testing framework for VIM scripts
 Bundle "runVimTests"
