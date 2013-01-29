@@ -10,6 +10,8 @@ call vundle#rc()
 " required!
 Bundle 'gmarik/vundle'
 
+" "Sensible" defaults?
+Bundle "tpope/vim-sensible"
 " Display trailing whitespaces
 Bundle 'jakobwesthoff/whitespacetrail'
 " Fancy snippet machine
@@ -22,8 +24,8 @@ Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-abolish'
 " Solarized color scheme
 Bundle "altercation/vim-colors-solarized"
-" :Rename command
-Bundle "danro/rename.vim"
+" :Rename command and more shell commands
+Bundle "tpope/vim-eunuch"
 " XML editing
 Bundle "sukima/xmledit"
 
@@ -68,11 +70,8 @@ set encoding=utf-8
 
 " Automatic indention and such around expressions/brackets
 set indentexpr=
-set autoindent
 set smartindent
 
-" Incremental search
-set incsearch
 " Do not highlight search results
 set nohlsearch
 
@@ -82,7 +81,6 @@ set scrolljump=5
 set scrolloff=3
 
 " Set the autocomplete style for files
-set wildmenu
 set wildmode=list:longest
 
 " Cursor line in insert mode
@@ -124,7 +122,6 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " Enable customized non-visible character display
 " http://vimcasts.org/episodes/show-invisibles/
 nnoremap <leader>L :set list!<CR>
-set listchars=tab:▸\ ,eol:¬
 
 " Save file as root using sudo
 cnoremap w!! w !sudo tee % >/dev/null
@@ -181,7 +178,9 @@ map <F6> :setlocal spell! spelllang=de<cr>
 python from powerline.bindings.vim import source_plugin; source_plugin()
 
 " Configure Ultisnips
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsExpandTrigger = "<Tab>"
+let g:UltiSnipsJumpForwardTrigger = "<Tab>"
+let g:UltiSnipsListSnippets = "<M-Tab>"
 " Set a custom snippets directory
 let g:UltiSnipsSnippetsDir = $HOME . "/.vim/snippets/"
 let g:UltiSnipsSnippetDirectories = ["snippets"]
@@ -192,3 +191,8 @@ nnoremap <C-p> :call pdv#DocumentWithSnip()<CR>
 
 " Remap leader for easy motion
 let g:EasyMotion_leader_key = '<Leader>'
+
+" Completion options
+set completeopt=menu,preview
+" Default completion is "normal" (what my old PHP FT plugin did)
+let g:SuperTabDefaultCompletionType = "<c-p>"
