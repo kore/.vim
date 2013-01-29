@@ -21,3 +21,30 @@ private function ${1:name}(${2:$param})
 }
 $0
 endsnippet
+
+snippet get "Getter function" !b
+/**
+ * Get ${1///} property
+ *
+ * @return ${2:mixed}
+ */
+public function get${1/^\w.*$/\u$0/}()
+{
+    return $this->${1:variable};
+}
+$0
+endsnippet
+
+snippet set "Setter function" !b
+/**
+ * Set ${1///} property
+ *
+ * @param ${2:mixed} $${1///}
+ * @return void
+ */
+public function set${1/^\w.*$/\u$0/}($${1:variable})
+{
+    $this->${1///} = $${1///};
+}
+$0
+endsnippet
