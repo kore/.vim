@@ -110,7 +110,6 @@ set t_Co=256
 
 syntax enable
 " let g:solarized_termcolors=256
-se t_Co=16
 set background=light
 colorscheme solarized
 
