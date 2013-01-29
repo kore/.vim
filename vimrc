@@ -37,6 +37,9 @@ Bundle "tobyS/pdv"
 Bundle "tobyS/vmustache"
 Bundle "tobyS/skeletons.vim"
 
+" RST heading management
+Bundle "tobyS/rst-headings.vim"
+
 " Required after Vundle did its job.
 filetype plugin indent on     " required!
 
