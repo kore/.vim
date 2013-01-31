@@ -54,8 +54,6 @@ endif
 
 " Set numbers, sort casing, tabstops and such
 set number
-set smartcase
-set ignorecase
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -64,6 +62,13 @@ set nocompatible
 set nopaste
 set hidden
 set nowrap
+
+" Be case insensitive in searches
+set ignorecase
+" If upper case letters occur, be case insensitive
+set smartcase
+" Infer the current case in insert completion
+set infercase
 
 " Set the mapleader and local map leader to ,
 let mapleader = ","
@@ -118,7 +123,19 @@ filetype indent on
 
 " Restore line number and column if reentering a file after having edited it
 " at least once. For this to work .viminfo in the home dir has to be writable by the user.
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+let g:restore_position_ignore = '.git/COMMIT_EDITMSG'
+au BufReadPost * call RestorePosition()
+
+func! RestorePosition()
+    if exists("g:restore_position_ignore") && match(expand("%"), g:restore_position_ignore) > -1
+        return
+    endif
+
+    if line("'\"") > 1 && line("'\"") <= line("$")
+        exe "normal! g`\""
+    endif
+endfunc
+
 
 " Enable customized non-visible character display
 " http://vimcasts.org/episodes/show-invisibles/
@@ -180,7 +197,6 @@ python from powerline.bindings.vim import source_plugin; source_plugin()
 
 " Configure Ultisnips
 let g:UltiSnipsExpandTrigger = "<Tab>"
-let g:UltiSnipsJumpForwardTrigger = "<Tab>"
 let g:UltiSnipsListSnippets = "<M-Tab>"
 " Set a custom snippets directory
 let g:UltiSnipsSnippetsDir = $HOME . "/.vim/snippets/"
