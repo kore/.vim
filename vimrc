@@ -209,6 +209,9 @@ nnoremap <C-p> :call pdv#DocumentWithSnip()<CR>
 " Remap leader for easy motion
 let g:EasyMotion_leader_key = '<Leader>'
 
+" Disable w3 syntax chcker. Horribly annoying on slow connections
+let g:syntastic_html_checkers=['tidy']
+
 " Completion options
 set completeopt=menu,preview
 " Default completion is "normal" (what my old PHP FT plugin did)
