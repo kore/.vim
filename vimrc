@@ -60,7 +60,7 @@ set softtabstop=4
 set expandtab
 set nocompatible
 set nopaste
-set hidden
+set nohidden
 set nowrap
 
 " Be case insensitive in searches
@@ -123,7 +123,7 @@ filetype indent on
 
 " Restore line number and column if reentering a file after having edited it
 " at least once. For this to work .viminfo in the home dir has to be writable by the user.
-let g:restore_position_ignore = '.git/COMMIT_EDITMSG'
+let g:restore_position_ignore = '.git/COMMIT_EDITMSG\|svn-commit.tmp'
 au BufReadPost * call RestorePosition()
 
 func! RestorePosition()
@@ -166,8 +166,8 @@ au BufRead,BufNewFile *.phps		set filetype=php
 " Undo history between sessions
 set undodir=~/.vim/undodir
 set undofile
-set undolevels=1000 "maximum number of changes that can be undone
-set undoreload=10000 "maximum number lines to save for undo on a buffer reload
+set undolevels=100 "maximum number of changes that can be undone
+set undoreload=1000 "maximum number lines to save for undo on a buffer reload
 
 " Colored column (to see line size violations)
 set colorcolumn=80
@@ -192,6 +192,9 @@ nnoremap <C-=> <C-W>=
 map <F5> :setlocal spell! spelllang=en_us<cr>
 " Map <F6> to turn spelling (de) on (VIM 7.0+)
 map <F6> :setlocal spell! spelllang=de<cr>
+
+" Exclude from Pasta
+let g:pasta_disabled_filetypes = ["tex"]
 
 python from powerline.bindings.vim import source_plugin; source_plugin()
 
