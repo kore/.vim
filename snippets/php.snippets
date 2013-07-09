@@ -5,6 +5,15 @@ public function ${1:name}(${2:$param})
 }
 endsnippet
 
+snippet puv "Public variable" !b
+/**
+ * ${1///}
+ *
+ * @var ${2:mixed}
+ */
+public $${1:name};
+endsnippet
+
 snippet prof "Protected function" !b
 protected function ${1:name}(${2:$param})
 {
@@ -12,10 +21,35 @@ protected function ${1:name}(${2:$param})
 }
 endsnippet
 
+snippet prov "Protected variable" !b
+/**
+ * ${1///}
+ *
+ * @var ${2:mixed}
+ */
+protected $${1:name};
+endsnippet
+
 snippet prif "Private function" !b
 private function ${1:name}(${2:$param})
 {
     ${VISUAL}${0:return null;}
+}
+endsnippet
+
+snippet priv "Private variable" !b
+/**
+ * ${1///}
+ *
+ * @var ${2:mixed}
+ */
+private $${1:name};
+endsnippet
+
+snippet ctor "Constructor" !b
+public function __construct($${1:param})
+{
+    $this->${1///} = $${1///};
 }
 endsnippet
 
