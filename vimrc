@@ -31,6 +31,9 @@ Bundle "sukima/xmledit"
 " Insert mode autocomplete management
 Bundle "ervandew/supertab"
 
+" Elixir syntax highlighting
+Bundle "elixir-lang/vim-elixir"
+
 " Testing framework for VIM scripts
 Bundle "runVimTests"
 
