@@ -47,6 +47,9 @@ Bundle "tobyS/skeletons.vim"
 " RST heading management
 Bundle "tobyS/rst-headings.vim"
 
+" Refactoring tool support
+Bundle 'tomphp/vim-php-refactoring'
+
 " Required after Vundle did its job.
 filetype plugin indent on     " required!
 
