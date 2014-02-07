@@ -1,8 +1,24 @@
 snippet puf "Public function" !b
+/**
+ * ${1///}
+ *
+ * @param mixed ${2///}
+ * @return void
+ */
 public function ${1:name}(${2:$param})
 {
     ${VISUAL}${0:return null;}
 }
+endsnippet
+
+snippet apuf "Abstract public function" !b
+/**
+ * ${1///}
+ *
+ * @param mixed ${2///}
+ * @return void
+ */
+abstract public function ${1:name}(${2:$param});
 endsnippet
 
 snippet puv "Public variable" !b
@@ -15,6 +31,12 @@ public $${1:name};
 endsnippet
 
 snippet prof "Protected function" !b
+/**
+ * ${1///}
+ *
+ * @param mixed ${2///}
+ * @return void
+ */
 protected function ${1:name}(${2:$param})
 {
     ${VISUAL}${0:return null;}
@@ -31,6 +53,12 @@ protected $${1:name};
 endsnippet
 
 snippet prif "Private function" !b
+/**
+ * ${1///}
+ *
+ * @param mixed ${2///}
+ * @return void
+ */
 private function ${1:name}(${2:$param})
 {
     ${VISUAL}${0:return null;}
