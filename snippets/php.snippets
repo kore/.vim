@@ -21,6 +21,13 @@ snippet apuf "Abstract public function" !b
 abstract public function ${1:name}(${2:$param});
 endsnippet
 
+snippet test "Test" !b
+public function test${1:Everything}()
+{
+	$this->markTestIncomplete("@TODO: Implement Test.");
+}
+endsnippet
+
 snippet puv "Public variable" !b
 /**
  * ${1///}
