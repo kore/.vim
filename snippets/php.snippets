@@ -1,6 +1,6 @@
 snippet puf "Public function" !b
 /**
- * ${1///}
+ * ${1/^([a-z0-9]+)([A-Z][a-z0-9]*)?([A-Z][a-z0-9]*)?$/\u$1 \l$2 \l$3/}
  *
  * @param mixed ${2///}
  * @return void
@@ -109,6 +109,30 @@ snippet set "Setter function" !b
  * @return void
  */
 public function set${1/^\w.*$/\u$0/}($${1:variable})
+{
+    $this->${1///} = $${1///};
+}
+$0
+endsnippet
+
+snippet getset "Getter and setter function" !b
+/**
+ * Get ${1///} property
+ *
+ * @return ${2:mixed}
+ */
+public function get${1/^\w.*$/\u$0/}()
+{
+    return $this->${1:variable};
+}
+
+/**
+ * Set ${1///} property
+ *
+ * @param ${2:mixed} $${1///}
+ * @return void
+ */
+public function set${1/^\w.*$/\u$0/}($${1///})
 {
     $this->${1///} = $${1///};
 }
