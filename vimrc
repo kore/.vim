@@ -208,8 +208,8 @@ python from powerline.bindings.vim import source_plugin; source_plugin()
 let g:UltiSnipsExpandTrigger = "<Tab>"
 let g:UltiSnipsListSnippets = "<M-Tab>"
 " Set a custom snippets directory
-let g:UltiSnipsSnippetsDir = $HOME . "/.vim/snippets/"
-let g:UltiSnipsSnippetDirectories = ["snippets"]
+let g:UltiSnipsSnippetsDir = $HOME . "/.vim/ultisnips/"
+let g:UltiSnipsSnippetDirectories = ["ultisnips"]
 
 " Configure PDV
 let g:pdv_template_dir = $HOME . "/.vim/config/pdv/templates"
