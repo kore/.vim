@@ -138,3 +138,21 @@ public function set${1/^\w.*$/\u$0/}($${1///})
 }
 $0
 endsnippet
+
+snippet cons "Constructor" !b
+/**
+ * ${1///}
+ *
+ * @var ${2///}
+ */
+private $${1///}
+
+/**
+ * @param ${2:mixed} $${1///}
+ * @return void
+ */
+public function __construct($${1///})
+{
+    $this->${1:variable} = $${1///};
+}
+endsnippet
