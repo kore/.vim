@@ -2,12 +2,28 @@
 TODO
 ====
 
+Next tips
+---------
+
+" Make moving page wise more comfortable
+nnoremap <C-j> <C-f>
+nnoremap <C-k> <C-b>
+" Jump to next/prev start of method
+nnoremap <leader>j ]m
+nnoremap <leader>k [m
+
+" Avoid <End> or <Esc>,<$>,<i> to jump to end of line
+inoremap jj <End>
+
+
+
+To get used to
+--------------
+
+-
+
 To try
 ------
 
 - https://github.com/tpope/vim-surround
   - Change surrounding chars (e.g. ' => ")
-- https://wincent.com/products/command-t
-  - Fancy file search
-- https://github.com/goldfeld/vim-seek
-  - Seek on the line

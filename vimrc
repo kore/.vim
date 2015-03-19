@@ -1,6 +1,7 @@
 set nocompatible               " be iMproved
 filetype off                   " required!
 
+set rtp+=/usr/share/vim/addons
 
 " Init Vundle
 set rtp+=~/.vim/bundle/vundle/
@@ -17,7 +18,7 @@ Bundle 'jakobwesthoff/whitespacetrail'
 " Fancy snippet machine
 Bundle 'SirVer/ultisnips'
 " Nice title bar
-Bundle 'Lokaltog/powerline'
+Bundle 'Lokaltog/vim-powerline'
 " Syntaxt checks
 Bundle 'scrooloose/syntastic'
 " Abbreviate and convenient substitute
@@ -28,14 +29,15 @@ Bundle "altercation/vim-colors-solarized"
 Bundle "tpope/vim-eunuch"
 " XML editing
 Bundle "sukima/xmledit"
+
 " Insert mode autocomplete management
 Bundle "ervandew/supertab"
 
 " Elixir syntax highlighting
 Bundle "elixir-lang/vim-elixir"
 
-" Testing framework for VIM scripts
-Bundle "runVimTests"
+" Expand region
+Bundle 'terryma/vim-expand-region'
 
 " PHP Documenting Bundle
 Bundle "tobyS/pdv"
@@ -58,6 +60,10 @@ if has("autocmd")
     autocmd bufwritepost .vimrc source $MYVIMRC
 endif
 
+"""""""""""""""""""
+" Standard settings
+"""""""""""""""""""
+
 " Set numbers, sort casing, tabstops and such
 set number
 set tabstop=4
@@ -68,6 +74,7 @@ set nocompatible
 set nopaste
 set nohidden
 set nowrap
+set encoding=utf-8
 
 " Be case insensitive in searches
 set ignorecase
@@ -76,10 +83,9 @@ set smartcase
 " Infer the current case in insert completion
 set infercase
 
-" Set the mapleader and local map leader to ,
-let mapleader = ","
-let maplocalleader = ","
-set encoding=utf-8
+" Set the mapleader and local map leader to <space>
+let mapleader = "\<Space>"
+let maplocalleader = "\<Space>"
 
 " Automatic indention and such around expressions/brackets
 set indentexpr=
@@ -95,6 +101,9 @@ set scrolloff=3
 
 " Set the autocomplete style for files
 set wildmode=list:longest
+
+" Deactivate original mode indicator, powerline does that
+set noshowmode
 
 " Cursor line in insert mode
 autocmd InsertLeave * set nocursorline
@@ -142,13 +151,18 @@ func! RestorePosition()
     endif
 endfunc
 
-
 " Enable customized non-visible character display
 " http://vimcasts.org/episodes/show-invisibles/
-nnoremap <leader>L :set list!<CR>
+nnoremap <leader>l :set list!<CR>
 
 " Save file as root using sudo
 cnoremap w!! w !sudo tee % >/dev/null
+
+" Alias common w/q misspells to their right meaning
+command WQ wq
+command Wq wq
+command W w
+command Q q
 
 " MovingThroughCamelCaseWords
 nnoremap <silent><C-Left>  :<C-u>cal search('\<\<Bar>\U\@<=\u\<Bar>\u\ze\%(\U\&\>\@!\)\<Bar>\%^','bW')<CR>
@@ -161,7 +175,7 @@ set pastetoggle=<ins>
 " Go to insert mode when <ins> pressed in normal mode
 nnoremap <silent> <ins> :setlocal paste!<CR>i
 " Switch paste mode off whenever insert mode is left
-autocmd InsertLeave <buffer> se nopaste
+autocmd InsertLeave <buffer> setlocal nopaste
 
 " Twig template highlighting
 autocmd BufRead *.twig set filetype=twig
@@ -185,19 +199,13 @@ cnoremap %% <C-R>=expand('%:h').'/'<cr>
 " http://vim.wikia.com/wiki/VimTip1386
 set completeopt=longest,menuone
 
-" Window Management
-" TODO: Doesn't work?
-nnoremap <C-j> <C-W>j
-nnoremap <C-h> <C-W>h
-nnoremap <C-k> <C-W>k
-nnoremap <C-l> <C-W>l
-nnoremap <C-0> <C-W>|
-nnoremap <C-=> <C-W>=
-
 " Map <F5> to turn spelling on (VIM 7.0+)
 map <F5> :setlocal spell! spelllang=en_us<cr>
 " Map <F6> to turn spelling (de) on (VIM 7.0+)
 map <F6> :setlocal spell! spelllang=de<cr>
+
+" Disable w3 syntax chcker. Horribly annoying on slow connections
+let g:syntastic_html_checkers=['tidy']
 
 " Exclude from Pasta
 let g:pasta_disabled_filetypes = ["tex"]
@@ -223,5 +231,75 @@ let g:syntastic_html_checkers=['tidy']
 
 " Completion options
 set completeopt=menu,preview
-" Default completion is "normal" (what my old PHP FT plugin did)
-let g:SuperTabDefaultCompletionType = "<c-p>"
+" Attempt to do semantic completion, then fall back to keywords
+let g:SuperTabDefaultCompletionType = "context"
+
+" Post private Gists by default
+let g:gist_post_private = 1
+
+" <C-P> is already PDV so <leader>o is used for CtrlP file finder
+let g:ctrlp_map = "<leader>o"
+" Use regex search in CtrlP by default (switch off, we want to use fuzzzzy!)
+" let g:ctrlp_regexp = 1
+set wildignore+=cache,src/var,src/data,.abc,build
+" Ignore VCS dirs (copied from docs)
+let g:ctrlp_custom_ignore = '\v[\/](\.(git|hg|svn)|vendor)$'
+" I want to search the current working dir only
+let g:ctrlp_working_path_mode = ''
+
+" Make moving in tabs more comfortable
+nnoremap <leader>j :tabprevious<CR>
+nnoremap <leader>k :tabnext<CR>
+" Shift version moves current tab
+nnoremap <leader><S-j> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
+nnoremap <leader><S-k> :execute 'silent! tabmove ' . tabpagenr()<CR>
+
+" Make moving page wise more comfortable
+nnoremap <C-j> <C-f>
+nnoremap <C-k> <C-b>
+" Jump to next/prev start of method
+nnoremap <C-m> ]m
+nnoremap <C-S-m> [m
+
+" Activate argument rewrap
+nnoremap <leader>w :call argumentrewrap#RewrapArguments()<CR>
+
+" Expand region with v-v-v...
+vmap v <Plug>(expand_region_expand)
+vmap <S-v> <Plug>(expand_region_shrink)
+
+" PHP expand objects
+let g:expand_region_text_objects_php = {
+    \ 'iw'  :0,
+    \ 'i"'  :0,
+    \ 'i''' :0,
+    \ 'i]'  :1,
+    \ 'ia'  :0,
+    \ 'aa'  :0,
+    \ 'i)'  :1,
+    \ 'a)'  :1,
+    \ 'i}'  :1,
+    \ 'a}'  :1
+    \ }
+
+" y/p/d with system clipboard through leader
+vmap <Leader>y "*y
+vmap <Leader>d "*d
+nmap <Leader>p "*p
+nmap <Leader>P "*P
+vmap <Leader>p "*p
+vmap <Leader>P "*P
+
+" Argument move & argument text object
+nnoremap <c-h> :SidewaysLeft<cr>
+nnoremap <c-l> :SidewaysRight<cr>
+
+omap aa <Plug>SidewaysArgumentTextobjA
+xmap aa <Plug>SidewaysArgumentTextobjA
+omap ia <Plug>SidewaysArgumentTextobjI
+xmap ia <Plug>SidewaysArgumentTextobjI
+
+" phpcomplete-extended
+
+let g:phpcomplete_index_composer_command = 'composer'
+autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP
