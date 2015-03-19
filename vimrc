@@ -17,8 +17,6 @@ Bundle "tpope/vim-sensible"
 Bundle 'jakobwesthoff/whitespacetrail'
 " Fancy snippet machine
 Bundle 'SirVer/ultisnips'
-" Nice title bar
-Bundle 'Lokaltog/vim-powerline'
 " Syntaxt checks
 Bundle 'scrooloose/syntastic'
 " Abbreviate and convenient substitute
@@ -30,24 +28,30 @@ Bundle "tpope/vim-eunuch"
 " XML editing
 Bundle "sukima/xmledit"
 
+" Vmustache template engine, prerequisite for PDV
+Bundle "tobyS/vmustache"
+" PHP Documentor for VIM
+Bundle "tobyS/pdv"
+" New file skeletons
+Bundle "tobyS/skeletons.vim"
+" Maintains RST headings
+Bundle "tobyS/rst-headings.vim"
+
+" Testing framework for VIM scripts
+Bundle "inkarkat/runVimTests"
+
+" Re-indents pasted code
+Bundle 'sickill/vim-pasta'
+ 
+" Pasting Gists from VIM
+Bundle 'mattn/webapi-vim'
+Bundle 'mattn/gist-vim'
+
 " Insert mode autocomplete management
 Bundle "ervandew/supertab"
 
 " Elixir syntax highlighting
 Bundle "elixir-lang/vim-elixir"
-
-" Expand region
-Bundle 'terryma/vim-expand-region'
-
-" PHP Documenting Bundle
-Bundle "tobyS/pdv"
-
-" Provides file skeletons
-Bundle "tobyS/vmustache"
-Bundle "tobyS/skeletons.vim"
-
-" RST heading management
-Bundle "tobyS/rst-headings.vim"
 
 " Refactoring tool support
 Bundle 'tomphp/vim-php-refactoring'
@@ -299,7 +303,9 @@ xmap aa <Plug>SidewaysArgumentTextobjA
 omap ia <Plug>SidewaysArgumentTextobjI
 xmap ia <Plug>SidewaysArgumentTextobjI
 
-" phpcomplete-extended
+" Disable folding
+set nofoldenable
 
+" phpcomplete-extended
 let g:phpcomplete_index_composer_command = 'composer'
 autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP
