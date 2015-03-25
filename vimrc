@@ -40,9 +40,6 @@ Bundle "tobyS/rst-headings.vim"
 " Testing framework for VIM scripts
 Bundle "inkarkat/runVimTests"
 
-" Re-indents pasted code
-Bundle 'sickill/vim-pasta'
- 
 " Pasting Gists from VIM
 Bundle 'mattn/webapi-vim'
 Bundle 'mattn/gist-vim'
