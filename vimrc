@@ -25,8 +25,6 @@ Bundle 'tpope/vim-abolish'
 Bundle "altercation/vim-colors-solarized"
 " :Rename command and more shell commands
 Bundle "tpope/vim-eunuch"
-" XML editing
-Bundle "sukima/xmledit"
 
 " Vmustache template engine, prerequisite for PDV
 Bundle "tobyS/vmustache"
@@ -302,6 +300,9 @@ xmap ia <Plug>SidewaysArgumentTextobjI
 
 " Disable folding
 set nofoldenable
+
+" Set terminal title
+set title
 
 " phpcomplete-extended
 let g:phpcomplete_index_composer_command = 'composer'
