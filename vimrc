@@ -176,9 +176,6 @@ nnoremap <silent> <ins> :setlocal paste!<CR>i
 " Switch paste mode off whenever insert mode is left
 autocmd InsertLeave <buffer> setlocal nopaste
 
-" Twig template highlighting
-autocmd BufRead *.twig set filetype=twig
-autocmd BufRead *.html.twig set filetype=htmltwig
 " Handle *.phps as PHP files
 au BufRead,BufNewFile *.phps		set filetype=php
 
