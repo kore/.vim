@@ -203,9 +203,6 @@ map <F5> :setlocal spell! spelllang=en_us<cr>
 " Map <F6> to turn spelling (de) on (VIM 7.0+)
 map <F6> :setlocal spell! spelllang=de<cr>
 
-" Disable w3 syntax chcker. Horribly annoying on slow connections
-let g:syntastic_html_checkers=['tidy']
-
 " Exclude from Pasta
 let g:pasta_disabled_filetypes = ["tex"]
 
@@ -225,8 +222,9 @@ nnoremap <C-p> :call pdv#DocumentWithSnip()<CR>
 " Remap leader for easy motion
 let g:EasyMotion_leader_key = '<Leader>'
 
-" Disable w3 syntax chcker. Horribly annoying on slow connections
-let g:syntastic_html_checkers=['tidy']
+" Disable HTML syntax checks. Horribly slow & annoying
+"let g:syntastic_debug=63
+let g:syntastic_ignore_extensions='\c\v^([gx]?z|lzma|html|bz2)$'
 
 " Completion options
 set completeopt=menu,preview
