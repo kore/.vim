@@ -1,0 +1,20 @@
+snippet comp "React component" !b
+'use strict'
+
+import React from "react"
+
+let ${1:name}= React.createClass({
+    render: function () {
+        return (<h1>${1///}</h1>)
+    }
+}
+
+export default ${1///}
+endsnippet
+
+snippet func "Function" !b
+${1:name}: function () {
+    return null
+},
+
+endsnippet
