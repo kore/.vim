@@ -1,10 +1,4 @@
 snippet puf "Public function" !b
-/**
- * ${1/^([a-z0-9]+)([A-Z][a-z0-9]*)?([A-Z][a-z0-9]*)?$/\u$1 \l$2 \l$3/}
- *
- * @param mixed ${2///}
- * @return void
- */
 public function ${1:name}(${2:$param})
 {
     ${VISUAL}${0:return null;}
@@ -12,12 +6,6 @@ public function ${1:name}(${2:$param})
 endsnippet
 
 snippet apuf "Abstract public function" !b
-/**
- * ${1///}
- *
- * @param mixed ${2///}
- * @return void
- */
 abstract public function ${1:name}(${2:$param});
 endsnippet
 
@@ -30,20 +18,12 @@ endsnippet
 
 snippet puv "Public variable" !b
 /**
- * ${1///}
- *
  * @var ${2:mixed}
  */
 public $${1:name};
 endsnippet
 
 snippet prof "Protected function" !b
-/**
- * ${1///}
- *
- * @param mixed ${2///}
- * @return void
- */
 protected function ${1:name}(${2:$param})
 {
     ${VISUAL}${0:return null;}
@@ -52,20 +32,12 @@ endsnippet
 
 snippet prov "Protected variable" !b
 /**
- * ${1///}
- *
  * @var ${2:mixed}
  */
 protected $${1:name};
 endsnippet
 
 snippet prif "Private function" !b
-/**
- * ${1///}
- *
- * @param mixed ${2///}
- * @return void
- */
 private function ${1:name}(${2:$param})
 {
     ${VISUAL}${0:return null;}
@@ -74,19 +46,12 @@ endsnippet
 
 snippet priv "Private variable" !b
 /**
- * ${1///}
- *
  * @var ${2:mixed}
  */
 private $${1:name};
 endsnippet
 
 snippet get "Getter function" !b
-/**
- * Get ${1///} property
- *
- * @return ${2:mixed}
- */
 public function get${1/^\w.*$/\u$0/}()
 {
     return $this->${1:variable};
@@ -95,12 +60,6 @@ $0
 endsnippet
 
 snippet set "Setter function" !b
-/**
- * Set ${1///} property
- *
- * @param ${2:mixed} $${1///}
- * @return void
- */
 public function set${1/^\w.*$/\u$0/}($${1:variable})
 {
     $this->${1///} = $${1///};
@@ -109,22 +68,11 @@ $0
 endsnippet
 
 snippet getset "Getter and setter function" !b
-/**
- * Get ${1///} property
- *
- * @return ${2:mixed}
- */
 public function get${1/^\w.*$/\u$0/}()
 {
     return $this->${1:variable};
 }
 
-/**
- * Set ${1///} property
- *
- * @param ${2:mixed} $${1///}
- * @return void
- */
 public function set${1/^\w.*$/\u$0/}($${1///})
 {
     $this->${1///} = $${1///};
@@ -133,17 +81,8 @@ $0
 endsnippet
 
 snippet cons "Constructor" !b
-/**
- * ${1///}
- *
- * @var ${2///}
- */
-private $${1///}
+private $${1///};
 
-/**
- * @param ${2:mixed} $${1///}
- * @return void
- */
 public function __construct($${1///})
 {
     $this->${1:variable} = $${1///};
@@ -167,4 +106,17 @@ for variable in argumentMatches:
 	snip.rv += snip.mkline("$this->" + variable + " = $" + variable + ";\n")
 `
 }
+endsnippet
+
+snippet dp "Data Provider" !b
+public function ${1///}()
+{
+	return array(
+		[],
+	);
+}
+
+/**
+ * @dataProvider ${1:dataProvider}
+ */
 endsnippet
