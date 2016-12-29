@@ -51,6 +51,9 @@ Bundle "elixir-lang/vim-elixir"
 " Refactoring tool support
 Bundle 'tomphp/vim-php-refactoring'
 
+" Multichange
+Bundle 'git@github.com:AndrewRadev/multichange.vim.git'
+
 " Required after Vundle did its job.
 filetype plugin indent on     " required!
 
