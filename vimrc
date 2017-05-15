@@ -78,6 +78,9 @@ set nohidden
 set nowrap
 set encoding=utf-8
 
+" Necessary for Vundle to work
+set shell=/bin/bash
+
 " Be case insensitive in searches
 set ignorecase
 " If upper case letters occur, be case insensitive
