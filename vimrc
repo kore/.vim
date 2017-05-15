@@ -48,6 +48,9 @@ Bundle "ervandew/supertab"
 " Elixir syntax highlighting
 Bundle "elixir-lang/vim-elixir"
 
+" Syntax and ftplugins for many languages
+Bundle 'sheerun/vim-polyglot'
+
 " Refactoring tool support
 Bundle 'tomphp/vim-php-refactoring'
 
