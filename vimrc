@@ -58,7 +58,9 @@ Bundle 'tomphp/vim-php-refactoring'
 Bundle 'git@github.com:AndrewRadev/multichange.vim.git'
 
 " Required after Vundle did its job.
-filetype plugin indent on     " required!
+if has("autocmd")
+    filetype plugin indent on
+endif
 
 " Automatically reload .vimrc if it is change
 if has("autocmd")
@@ -311,3 +313,6 @@ set title
 " phpcomplete-extended
 let g:phpcomplete_index_composer_command = 'composer'
 autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP
+
+" Disable polyglot JSX indentation which breaks indent in JavaScript files
+let g:polyglot_disabled = ['jsx']
