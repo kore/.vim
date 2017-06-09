@@ -51,6 +51,9 @@ Bundle "elixir-lang/vim-elixir"
 " Syntax and ftplugins for many languages
 Bundle 'sheerun/vim-polyglot'
 
+" Syntax and ftplugins for many languages
+Bundle 'Valloric/YouCompleteMe'
+
 " Refactoring tool support
 Bundle 'tomphp/vim-php-refactoring'
 
@@ -316,3 +319,6 @@ autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP
 
 " Disable polyglot JSX indentation which breaks indent in JavaScript files
 let g:polyglot_disabled = ['jsx']
+
+" Complete options (disable preview scratch window, longest removed to aways show menu)
+set completeopt=menu,menuone
