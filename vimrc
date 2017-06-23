@@ -314,8 +314,8 @@ set nofoldenable
 set title
 
 " phpcomplete-extended
-let g:phpcomplete_index_composer_command = 'composer'
-autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP
+"let g:phpcomplete_index_composer_command = 'composer'
+"autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP
 
 " Disable polyglot JSX indentation which breaks indent in JavaScript files
 let g:polyglot_disabled = ['jsx']
