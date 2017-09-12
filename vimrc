@@ -60,6 +60,23 @@ Bundle 'tomphp/vim-php-refactoring'
 " Multichange
 Bundle 'git@github.com:AndrewRadev/multichange.vim.git'
 
+" Disable polyglot JSX indentation which breaks indent in JavaScript files
+let g:polyglot_disabled = ['jsx', 'php']
+
+" Disable YouCompleteMe for PHP
+"let g:ycm_filetype_blacklist = { 'php': 1 }
+
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+
 " Required after Vundle did its job.
 if has("autocmd")
     filetype plugin indent on
@@ -107,6 +124,15 @@ set smartindent
 " Do not highlight search results
 set nohlsearch
 
+" Highlight extra spaces at the line ending
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+
+
 " Jump 5 lines when running out of the screen
 set scrolljump=5
 " Indicate jump out of the screen when 3 lines before end of the screen
@@ -145,6 +171,11 @@ syntax enable
 " let g:solarized_termcolors=256
 set background=light
 colorscheme solarized
+
+" Complete options (disable preview scratch window, longest removed to aways show menu)
+set completeopt=menu,menuone
+
+set formatoptions-=w
 
 filetype plugin on
 filetype indent on
@@ -205,10 +236,6 @@ set colorcolumn=80
 " Edit Files relativ to me
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 
-" Enhance Omnicompletion
-" http://vim.wikia.com/wiki/VimTip1386
-set completeopt=longest,menuone
-
 " Map <F5> to turn spelling on (VIM 7.0+)
 map <F5> :setlocal spell! spelllang=en_us<cr>
 " Map <F6> to turn spelling (de) on (VIM 7.0+)
@@ -237,8 +264,6 @@ let g:EasyMotion_leader_key = '<Leader>'
 "let g:syntastic_debug=63
 let g:syntastic_ignore_extensions='\c\v^([gx]?z|lzma|html|bz2)$'
 
-" Completion options
-set completeopt=menu,preview
 " Attempt to do semantic completion, then fall back to keywords
 let g:SuperTabDefaultCompletionType = "context"
 
@@ -312,30 +337,3 @@ set nofoldenable
 
 " Set terminal title
 set title
-
-" phpcomplete-extended
-"let g:phpcomplete_index_composer_command = 'composer'
-"autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP
-
-" Disable polyglot JSX indentation which breaks indent in JavaScript files
-let g:polyglot_disabled = ['jsx']
-
-" Complete options (disable preview scratch window, longest removed to aways show menu)
-set completeopt=menu,menuone
-
-set noruler
-set expandtab
-
-highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-autocmd BufWinLeave * call clearmatches()
-
-set formatoptions-=w
-
-syntax on
-se t_Co=16
-set background=light
-colorscheme solarized
