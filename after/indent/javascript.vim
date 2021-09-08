@@ -11,3 +11,6 @@ setlocal nocindent
 " Enable indentation copy and smart indentation after c-style blocks instead
 setlocal autoindent
 setlocal smartindent
+
+setlocal shiftwidth=2
+setlocal tabstop=2
