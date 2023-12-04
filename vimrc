@@ -11,36 +11,12 @@ call vundle#rc()
 " required!
 Bundle 'gmarik/vundle'
 
-" "Sensible" defaults?
+" "Sensible" defaults
 Bundle "tpope/vim-sensible"
 " Display trailing whitespaces
 Bundle 'jakobwesthoff/whitespacetrail'
-" Fancy snippet machine
-" Bundle 'SirVer/ultisnips'
-" Syntaxt checks
-Bundle 'scrooloose/syntastic'
 " Abbreviate and convenient substitute
 Bundle 'tpope/vim-abolish'
-" Solarized color scheme
-" Bundle "altercation/vim-colors-solarized"
-" :Rename command and more shell commands
-Bundle "tpope/vim-eunuch"
-
-" Vmustache template engine, prerequisite for PDV
-Bundle "tobyS/vmustache"
-" PHP Documentor for VIM
-Bundle "tobyS/pdv"
-" New file skeletons
-Bundle "tobyS/skeletons.vim"
-" Maintains RST headings
-Bundle "tobyS/rst-headings.vim"
-
-" Testing framework for VIM scripts
-Bundle "inkarkat/runVimTests"
-
-" Pasting Gists from VIM
-Bundle 'mattn/webapi-vim'
-Bundle 'mattn/gist-vim'
 
 " Insert mode autocomplete management
 Bundle "ervandew/supertab"
@@ -48,14 +24,11 @@ Bundle "ervandew/supertab"
 " Elixir syntax highlighting
 Bundle "elixir-lang/vim-elixir"
 
+" HLSL Syntax highlightinh
+Bundle 'beyondmarc/hlsl.vim'
+
 " Syntax and ftplugins for many languages
 Bundle 'sheerun/vim-polyglot'
-
-" Syntax and ftplugins for many languages
-" Bundle 'Valloric/YouCompleteMe'
-
-" Refactoring tool support
-Bundle 'tomphp/vim-php-refactoring'
 
 " Multichange
 Bundle 'git@github.com:AndrewRadev/multichange.vim.git'
@@ -63,22 +36,8 @@ Bundle 'git@github.com:AndrewRadev/multichange.vim.git'
 " Everforest theme
 Bundle 'sainnhe/everforest'
 
-" HLSL Syntax highlightinh
-Bundle 'beyondmarc/hlsl.vim'
-
 " Disable polyglot JSX indentation which breaks indent in JavaScript files
 let g:polyglot_disabled = ['jsx', 'php']
-
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
-
-" better key bindings for UltiSnipsExpandTrigger
-" let g:UltiSnipsExpandTrigger = "<tab>"
-" let g:UltiSnipsJumpForwardTrigger = "<C-tab>"
-" let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-
 
 " Required after Vundle did its job.
 if has("autocmd")
@@ -135,7 +94,6 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
-
 " Jump 5 lines when running out of the screen
 set scrolljump=5
 " Indicate jump out of the screen when 3 lines before end of the screen
@@ -171,13 +129,9 @@ set modeline
 set t_Co=256
 
 syntax enable
-" let g:solarized_termcolors=256
-set background=light
-" colorscheme solarized
 
 " Complete options (disable preview scratch window, longest removed to aways show menu)
 set completeopt=menu,menuone
-
 set formatoptions-=w
 
 filetype plugin on
@@ -244,18 +198,6 @@ map <F5> :setlocal spell! spelllang=en_us<cr>
 " Map <F6> to turn spelling (de) on (VIM 7.0+)
 map <F6> :setlocal spell! spelllang=de<cr>
 
-" Exclude from Pasta
-let g:pasta_disabled_filetypes = ["tex"]
-
-" python from powerline.bindings.vim import source_plugin; source_plugin()
-
-" Configure Ultisnips
-" let g: UltiSnipsExpandTrigger = "<Tab>"
-" let g:UltiSnipsListSnippets = "<M-Tab>"
-" Set a custom snippets directory
-" let g:UltiSnipsSnippetsDir = $HOME . "/.vim/ultisnips/"
-" let g:UltiSnipsSnippetDirectories = ["ultisnips"]
-
 " Configure PDV
 let g:pdv_template_dir = $HOME . "/.vim/config/pdv/templates"
 nnoremap <C-p> :call pdv#DocumentWithSnip()<CR>
@@ -264,14 +206,10 @@ nnoremap <C-p> :call pdv#DocumentWithSnip()<CR>
 let g:EasyMotion_leader_key = '<Leader>'
 
 " Disable HTML syntax checks. Horribly slow & annoying
-"let g:syntastic_debug=63
 let g:syntastic_ignore_extensions='\c\v^([gx]?z|lzma|html|bz2)$'
 
 " Attempt to do semantic completion, then fall back to keywords
 let g:SuperTabDefaultCompletionType = "context"
-
-" Post private Gists by default
-let g:gist_post_private = 1
 
 " <C-P> is already PDV so <leader>o is used for CtrlP file finder
 let g:ctrlp_map = "<leader>o"
@@ -346,15 +284,8 @@ if has('termguicolors')
   set termguicolors
 endif
 
-" For light version.
 set background=light
-
-" Set contrast.
-" This configuration option should be placed before `colorscheme everforest`.
-" Available values: 'hard', 'medium'(default), 'soft'
 let g:everforest_background = 'hard'
-
-" For better performance
 let g:everforest_better_performance = 1
 
 colorscheme everforest
