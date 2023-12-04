@@ -63,6 +63,9 @@ Bundle 'git@github.com:AndrewRadev/multichange.vim.git'
 " Everforest theme
 Bundle 'sainnhe/everforest'
 
+" HLSL Syntax highlightinh
+Bundle 'beyondmarc/hlsl.vim'
+
 " Disable polyglot JSX indentation which breaks indent in JavaScript files
 let g:polyglot_disabled = ['jsx', 'php']
 
