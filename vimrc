@@ -60,6 +60,9 @@ Bundle 'tomphp/vim-php-refactoring'
 " Multichange
 Bundle 'git@github.com:AndrewRadev/multichange.vim.git'
 
+" Everforest theme
+Bundle 'sainnhe/everforest'
+
 " Disable polyglot JSX indentation which breaks indent in JavaScript files
 let g:polyglot_disabled = ['jsx', 'php']
 
@@ -334,3 +337,21 @@ set nofoldenable
 
 " Set terminal title
 set title
+
+" Set Everforest theme
+if has('termguicolors')
+  set termguicolors
+endif
+
+" For light version.
+set background=light
+
+" Set contrast.
+" This configuration option should be placed before `colorscheme everforest`.
+" Available values: 'hard', 'medium'(default), 'soft'
+let g:everforest_background = 'hard'
+
+" For better performance
+let g:everforest_better_performance = 1
+
+colorscheme everforest
