@@ -16,13 +16,13 @@ Bundle "tpope/vim-sensible"
 " Display trailing whitespaces
 Bundle 'jakobwesthoff/whitespacetrail'
 " Fancy snippet machine
-Bundle 'SirVer/ultisnips'
+" Bundle 'SirVer/ultisnips'
 " Syntaxt checks
 Bundle 'scrooloose/syntastic'
 " Abbreviate and convenient substitute
 Bundle 'tpope/vim-abolish'
 " Solarized color scheme
-Bundle "altercation/vim-colors-solarized"
+" Bundle "altercation/vim-colors-solarized"
 " :Rename command and more shell commands
 Bundle "tpope/vim-eunuch"
 
@@ -52,7 +52,7 @@ Bundle "elixir-lang/vim-elixir"
 Bundle 'sheerun/vim-polyglot'
 
 " Syntax and ftplugins for many languages
-Bundle 'Valloric/YouCompleteMe'
+" Bundle 'Valloric/YouCompleteMe'
 
 " Refactoring tool support
 Bundle 'tomphp/vim-php-refactoring'
@@ -69,9 +69,9 @@ let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<C-tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+" let g:UltiSnipsExpandTrigger = "<tab>"
+" let g:UltiSnipsJumpForwardTrigger = "<C-tab>"
+" let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 
 " Required after Vundle did its job.
@@ -167,7 +167,7 @@ set t_Co=256
 syntax enable
 " let g:solarized_termcolors=256
 set background=light
-colorscheme solarized
+" colorscheme solarized
 
 " Complete options (disable preview scratch window, longest removed to aways show menu)
 set completeopt=menu,menuone
@@ -244,11 +244,11 @@ let g:pasta_disabled_filetypes = ["tex"]
 " python from powerline.bindings.vim import source_plugin; source_plugin()
 
 " Configure Ultisnips
-let g:UltiSnipsExpandTrigger = "<Tab>"
-let g:UltiSnipsListSnippets = "<M-Tab>"
+" let g: UltiSnipsExpandTrigger = "<Tab>"
+" let g:UltiSnipsListSnippets = "<M-Tab>"
 " Set a custom snippets directory
-let g:UltiSnipsSnippetsDir = $HOME . "/.vim/ultisnips/"
-let g:UltiSnipsSnippetDirectories = ["ultisnips"]
+" let g:UltiSnipsSnippetsDir = $HOME . "/.vim/ultisnips/"
+" let g:UltiSnipsSnippetDirectories = ["ultisnips"]
 
 " Configure PDV
 let g:pdv_template_dir = $HOME . "/.vim/config/pdv/templates"
