@@ -66,7 +66,7 @@ set nowrap
 set encoding=utf-8
 
 " Necessary for Vundle to work
-set shell=/bin/bash
+set shell=/run/current-system/sw/bin/bash
 
 " Be case insensitive in searches
 set ignorecase
