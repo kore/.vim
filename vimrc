@@ -11,8 +11,6 @@ Bundle 'gmarik/vundle'
 
 " "Sensible" defaults
 Bundle "tpope/vim-sensible"
-" Display trailing whitespaces
-Bundle 'jakobwesthoff/whitespacetrail'
 " Abbreviate and convenient substitute
 Bundle 'tpope/vim-abolish'
 
@@ -41,14 +39,15 @@ Bundle 'airblade/vim-gitgutter'
 let g:polyglot_disabled = ['jsx', 'php']
 
 " Required after Vundle did its job.
-if has("autocmd")
-    filetype plugin indent on
-endif
+filetype plugin indent on
 
-" Automatically reload .vimrc if it is change
-if has("autocmd")
-    autocmd bufwritepost .vimrc source $MYVIMRC
-endif
+" All autocommands below go into this group, so re-sourcing does not stack them
+augroup vimrc
+    autocmd!
+augroup END
+
+" Automatically reload vimrc when it is changed
+autocmd vimrc BufWritePost .vimrc,vimrc source $MYVIMRC
 
 """""""""""""""""""
 " Standard settings
@@ -86,13 +85,11 @@ set smartindent
 " Do not highlight search results
 set nohlsearch
 
-" Highlight extra spaces at the line ending
-highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-autocmd BufWinLeave * call clearmatches()
+" Highlight extra spaces at the line ending (not while typing at the cursor).
+" Defined on ColorScheme, as :colorscheme clears custom highlight groups.
+autocmd vimrc ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+autocmd vimrc BufWinEnter,InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd vimrc InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 
 " Jump 5 lines when running out of the screen
 set scrolljump=5
@@ -103,8 +100,8 @@ set scrolloff=3
 set wildmode=list:longest
 
 " Cursor line in insert mode
-autocmd InsertLeave * set nocursorline
-autocmd InsertEnter * set cursorline
+autocmd vimrc InsertLeave * set nocursorline
+autocmd vimrc InsertEnter * set cursorline
 
 " Deactivate visual bell
 set visualbell
@@ -126,7 +123,7 @@ set formatoptions-=w
 " Restore line number and column if reentering a file after having edited it
 " at least once. For this to work .viminfo in the home dir has to be writable by the user.
 let g:restore_position_ignore = '.git/COMMIT_EDITMSG\|svn-commit.tmp'
-au BufReadPost * call RestorePosition()
+autocmd vimrc BufReadPost * call RestorePosition()
 
 func! RestorePosition()
     if exists("g:restore_position_ignore") && match(expand("%"), g:restore_position_ignore) > -1
@@ -146,10 +143,10 @@ nnoremap <leader>l :set list!<CR>
 cnoremap w!! w !sudo tee % >/dev/null
 
 " Alias common w/q misspells to their right meaning
-command WQ wq
-command Wq wq
-command W w
-command Q q
+command! WQ wq
+command! Wq wq
+command! W w
+command! Q q
 
 " MovingThroughCamelCaseWords
 nnoremap <silent><C-Left>  :<C-u>cal search('\<\<Bar>\U\@<=\u\<Bar>\u\ze\%(\U\&\>\@!\)\<Bar>\%^','bW')<CR>
@@ -162,10 +159,10 @@ set pastetoggle=<ins>
 " Go to insert mode when <ins> pressed in normal mode
 nnoremap <silent> <ins> :setlocal paste!<CR>i
 " Switch paste mode off whenever insert mode is left
-autocmd InsertLeave <buffer> setlocal nopaste
+autocmd vimrc InsertLeave * setlocal nopaste
 
 " Handle *.phps as PHP files
-au BufRead,BufNewFile *.phps		set filetype=php
+autocmd vimrc BufRead,BufNewFile *.phps set filetype=php
 
 " Undo history between sessions
 set undodir=~/.vim/undodir
