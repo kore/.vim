@@ -162,9 +162,6 @@ map <F5> :setlocal spell! spelllang=en_us<cr>
 " Map <F6> to turn spelling (de) on (VIM 7.0+)
 map <F6> :setlocal spell! spelllang=de<cr>
 
-" Attempt to do semantic completion, then fall back to keywords
-let g:SuperTabDefaultCompletionType = "context"
-
 set wildignore+=cache,src/var,src/data,.abc,build
 
 " Make moving in tabs more comfortable
@@ -211,3 +208,49 @@ nnoremap <silent> <leader>g :GitGutterToggle<CR>
 " Jump between changed hunks
 nmap ]h <Plug>(GitGutterNextHunk)
 nmap [h <Plug>(GitGutterPrevHunk)
+
+" Language servers (yegappan/lsp reads g:lsp_options and g:lsp_servers on
+" load). Servers that are not installed are skipped
+" silently. Most only start inside a project (see runIfSearch), so loose files
+" do not get bogus errors.
+let g:lsp_options = #{
+    \ autoComplete: v:false,
+    \ ignoreMissingServer: v:true,
+    \ highlightDiagInline: v:false,
+    \ showDiagWithVirtualText: v:false,
+    \ diagSignErrorText: '!',
+    \ diagSignWarningText: '?',
+    \ diagSignInfoText: 'i',
+    \ diagSignHintText: '.',
+    \ }
+let g:lsp_servers = [
+    \ #{name: 'intelephense', filetype: ['php'],
+    \   path: 'intelephense', args: ['--stdio'],
+    \   runIfSearch: ['composer.json', '.git/']},
+    \ #{name: 'typescript', filetype: ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'],
+    \   path: 'typescript-language-server', args: ['--stdio'],
+    \   runIfSearch: ['package.json', 'tsconfig.json']},
+    \ #{name: 'css', filetype: ['css', 'scss', 'less'],
+    \   path: 'vscode-css-language-server', args: ['--stdio'],
+    \   runIfSearch: ['package.json', '.git/']},
+    \ #{name: 'rust-analyzer', filetype: ['rust'],
+    \   path: 'rust-analyzer', args: [], syncInit: v:true,
+    \   runIfSearch: ['Cargo.toml']},
+    \ #{name: 'nixd', filetype: ['nix'],
+    \   path: 'nixd', args: []},
+    \ ]
+
+" Mappings, only in buffers with a running language server
+function! s:LspMappings()
+    nnoremap <buffer> <silent> gd <Cmd>LspGotoDefinition<CR>
+    nnoremap <buffer> <silent> K <Cmd>LspHover<CR>
+    nnoremap <buffer> <silent> <leader>r <Cmd>LspRename<CR>
+    nnoremap <buffer> <silent> <leader>u <Cmd>LspShowReferences<CR>
+    nnoremap <buffer> <silent> <leader>e <Cmd>LspDiag current<CR>
+    nnoremap <buffer> <silent> ]d <Cmd>LspDiag nextWrap<CR>
+    nnoremap <buffer> <silent> [d <Cmd>LspDiag prevWrap<CR>
+    " Completion on demand (terminals send <Nul> for <C-Space>)
+    inoremap <buffer> <C-Space> <C-x><C-o>
+    inoremap <buffer> <Nul> <C-x><C-o>
+endfunction
+autocmd vimrc User LspAttached call s:LspMappings()
