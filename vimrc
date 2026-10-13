@@ -249,8 +249,19 @@ function! s:LspMappings()
     nnoremap <buffer> <silent> <leader>e <Cmd>LspDiag current<CR>
     nnoremap <buffer> <silent> ]d <Cmd>LspDiag nextWrap<CR>
     nnoremap <buffer> <silent> [d <Cmd>LspDiag prevWrap<CR>
-    " Completion on demand (terminals send <Nul> for <C-Space>)
-    inoremap <buffer> <C-Space> <C-x><C-o>
-    inoremap <buffer> <Nul> <C-x><C-o>
+    " Complete with <Tab> after a word, indent with <Tab> everywhere else
+    inoremap <buffer> <expr> <Tab> <SID>TabComplete()
+    inoremap <buffer> <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+endfunction
+
+function! s:TabComplete()
+    if pumvisible()
+        return "\<C-n>"
+    endif
+    let l:col = col('.') - 1
+    if l:col == 0 || getline('.')[l:col - 1] =~ '\s'
+        return "\<Tab>"
+    endif
+    return "\<C-x>\<C-o>"
 endfunction
 autocmd vimrc User LspAttached call s:LspMappings()
