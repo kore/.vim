@@ -11,20 +11,21 @@ setup, while I recommend to just looking into it and get inspiration from it.
 Install
 -------
 
-1. Clone this Git repo
-2. Run ``$ ./vundle_install.sh``
-3. Link the following files::
+1. Clone this Git repo including the plugin submodules::
+
+        git clone --recurse-submodules <url>
+
+   (In an existing clone: ``git submodule update --init``)
+
+2. Link the following files::
 
         ~/.vim          -> <repo>/
         ~/.vimrc        -> <repo>/vimrc
 
-4. Run the following command to install all bundles::
+Plugins live in ``pack/plugins/start/`` and are loaded by Vim's native package
+support. Update them with::
 
-        vim +BundleInstall +qall
-
-   Alternatively you can execute the following in VIM itself::
-
-        :BundleInstall
+        git submodule update --remote --merge
 
 --------------------------
 Thanks for inspirations to

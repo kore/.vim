@@ -1,44 +1,14 @@
-set nocompatible               " be iMproved
-filetype off                   " required!
+set nocompatible
 
-" Init Vundle
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-" let Vundle manage Vundle
-" required!
-Bundle 'gmarik/vundle'
-
-" "Sensible" defaults
-Bundle "tpope/vim-sensible"
-" Abbreviate and convenient substitute
-Bundle 'tpope/vim-abolish'
-
-" Insert mode autocomplete management
-Bundle "ervandew/supertab"
-
-" Elixir syntax highlighting
-Bundle "elixir-lang/vim-elixir"
-
-" HLSL Syntax highlightinh
-Bundle 'beyondmarc/hlsl.vim'
-
-" Syntax and ftplugins for many languages
-Bundle 'sheerun/vim-polyglot'
-
-" Multichange
-Bundle 'git@github.com:AndrewRadev/multichange.vim.git'
-
-" Everforest theme
-Bundle 'sainnhe/everforest'
-
-" Git diff markers in the sign column (toggled on demand, see below)
-Bundle 'airblade/vim-gitgutter'
+" Plugins are git submodules in pack/plugins/start/ and are loaded by Vim's
+" native package support after this file. Add one with:
+"   git submodule add <url> pack/plugins/start/<name>
+" and update all with:
+"   git submodule update --remote --merge
 
 " Disable polyglot JSX indentation which breaks indent in JavaScript files
 let g:polyglot_disabled = ['jsx', 'php']
 
-" Required after Vundle did its job.
 filetype plugin indent on
 
 " All autocommands below go into this group, so re-sourcing does not stack them
@@ -64,7 +34,7 @@ set nohidden
 set nowrap
 set encoding=utf-8
 
-" Necessary for Vundle to work
+" Use the system bash (required on NixOS)
 set shell=/run/current-system/sw/bin/bash
 
 " Be case insensitive in searches
