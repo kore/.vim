@@ -133,6 +133,9 @@ autocmd vimrc InsertLeave * setlocal nopaste
 
 " Handle *.phps as PHP files
 autocmd vimrc BufRead,BufNewFile *.phps set filetype=php
+" Handle *.list (slide lists) as TeX files. Kept here instead of in ftdetect/,
+" because vim-polyglot clears the filetypedetect group.
+autocmd vimrc BufRead,BufNewFile *.list set filetype=tex
 
 " Undo history between sessions
 set undodir=~/.vim/undodir
