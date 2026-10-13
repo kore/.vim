@@ -36,6 +36,9 @@ Bundle 'git@github.com:AndrewRadev/multichange.vim.git'
 " Everforest theme
 Bundle 'sainnhe/everforest'
 
+" Git diff markers in the sign column (toggled on demand, see below)
+Bundle 'airblade/vim-gitgutter'
+
 " Disable polyglot JSX indentation which breaks indent in JavaScript files
 let g:polyglot_disabled = ['jsx', 'php']
 
@@ -289,3 +292,12 @@ let g:everforest_background = 'hard'
 let g:everforest_better_performance = 1
 
 colorscheme everforest
+
+" Git diff display: off by default, <leader>g toggles signs + line highlights
+let g:gitgutter_enabled = 0
+let g:gitgutter_highlight_lines = 1
+set updatetime=250
+nnoremap <silent> <leader>g :GitGutterToggle<CR>
+" Jump between changed hunks
+nmap ]h <Plug>(GitGutterNextHunk)
+nmap [h <Plug>(GitGutterPrevHunk)
