@@ -1,8 +1,6 @@
 set nocompatible               " be iMproved
 filetype off                   " required!
 
-set rtp+=/usr/share/vim/addons
-
 " Init Vundle
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -62,7 +60,6 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set expandtab
-set nocompatible
 set nopaste
 set nohidden
 set nowrap
@@ -105,9 +102,6 @@ set scrolloff=3
 " Set the autocomplete style for files
 set wildmode=list:longest
 
-" Deactivate original mode indicator, powerline does that
-set noshowmode
-
 " Cursor line in insert mode
 autocmd InsertLeave * set nocursorline
 autocmd InsertEnter * set cursorline
@@ -115,30 +109,19 @@ autocmd InsertEnter * set cursorline
 " Deactivate visual bell
 set visualbell
 set t_vb=
-set ttyfast
 set noruler
 set laststatus=2
 
-" Repair wired terminal/vim settings
-set backspace=start,eol,indent
 " ???
 set ofu=syntaxcomplete#Complete
 " Allow file inline modelines to provide settings
 set modeline
-
-" Set mapping for CSApprox
-" let g:CSApprox_attr_map = { 'bold' : 'bold', 'italic' : '', 'sp' : '' }
-" Set colors
-set t_Co=256
 
 syntax enable
 
 " Complete options (disable preview scratch window, longest removed to aways show menu)
 set completeopt=menu,menuone
 set formatoptions-=w
-
-filetype plugin on
-filetype indent on
 
 " Restore line number and column if reentering a file after having edited it
 " at least once. For this to work .viminfo in the home dir has to be writable by the user.
@@ -190,6 +173,12 @@ set undofile
 set undolevels=100 "maximum number of changes that can be undone
 set undoreload=1000 "maximum number lines to save for undo on a buffer reload
 
+" Keep swap files out of ~/.vim (which is this repository)
+if !isdirectory($HOME . '/.cache/vim/swap')
+    call mkdir($HOME . '/.cache/vim/swap', 'p', 0700)
+endif
+set directory=~/.cache/vim/swap//
+
 " Colored column (to see line size violations)
 set colorcolumn=80
 
@@ -201,28 +190,10 @@ map <F5> :setlocal spell! spelllang=en_us<cr>
 " Map <F6> to turn spelling (de) on (VIM 7.0+)
 map <F6> :setlocal spell! spelllang=de<cr>
 
-" Configure PDV
-let g:pdv_template_dir = $HOME . "/.vim/config/pdv/templates"
-nnoremap <C-p> :call pdv#DocumentWithSnip()<CR>
-
-" Remap leader for easy motion
-let g:EasyMotion_leader_key = '<Leader>'
-
-" Disable HTML syntax checks. Horribly slow & annoying
-let g:syntastic_ignore_extensions='\c\v^([gx]?z|lzma|html|bz2)$'
-
 " Attempt to do semantic completion, then fall back to keywords
 let g:SuperTabDefaultCompletionType = "context"
 
-" <C-P> is already PDV so <leader>o is used for CtrlP file finder
-let g:ctrlp_map = "<leader>o"
-" Use regex search in CtrlP by default (switch off, we want to use fuzzzzy!)
-" let g:ctrlp_regexp = 1
 set wildignore+=cache,src/var,src/data,.abc,build
-" Ignore VCS dirs (copied from docs)
-let g:ctrlp_custom_ignore = '\v[\/](\.(git|hg|svn)|vendor)$'
-" I want to search the current working dir only
-let g:ctrlp_working_path_mode = ''
 
 " Make moving in tabs more comfortable
 nnoremap <leader>j :tabprevious<CR>
@@ -234,30 +205,6 @@ nnoremap <leader><S-k> :execute 'silent! tabmove ' . tabpagenr()<CR>
 " Make moving page wise more comfortable
 nnoremap <C-j> <C-f>
 nnoremap <C-k> <C-b>
-" Jump to next/prev start of method
-nnoremap <C-m> ]m
-nnoremap <C-S-m> [m
-
-" Activate argument rewrap
-nnoremap <leader>w :call argumentrewrap#RewrapArguments()<CR>
-
-" Expand region with v-v-v...
-vmap v <Plug>(expand_region_expand)
-vmap <S-v> <Plug>(expand_region_shrink)
-
-" PHP expand objects
-let g:expand_region_text_objects_php = {
-    \ 'iw'  :0,
-    \ 'i"'  :0,
-    \ 'i''' :0,
-    \ 'i]'  :1,
-    \ 'ia'  :0,
-    \ 'aa'  :0,
-    \ 'i)'  :1,
-    \ 'a)'  :1,
-    \ 'i}'  :1,
-    \ 'a}'  :1
-    \ }
 
 " y/p/d with system clipboard through leader
 vmap <Leader>y "*y
@@ -266,15 +213,6 @@ nmap <Leader>p "*p
 nmap <Leader>P "*P
 vmap <Leader>p "*p
 vmap <Leader>P "*P
-
-" Argument move & argument text object
-nnoremap <c-h> :SidewaysLeft<cr>
-nnoremap <c-l> :SidewaysRight<cr>
-
-omap aa <Plug>SidewaysArgumentTextobjA
-xmap aa <Plug>SidewaysArgumentTextobjA
-omap ia <Plug>SidewaysArgumentTextobjI
-xmap ia <Plug>SidewaysArgumentTextobjI
 
 " Disable folding
 set nofoldenable
