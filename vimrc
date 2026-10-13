@@ -137,17 +137,19 @@ autocmd vimrc BufRead,BufNewFile *.phps set filetype=php
 " because vim-polyglot clears the filetypedetect group.
 autocmd vimrc BufRead,BufNewFile *.list set filetype=tex
 
-" Undo history between sessions
-set undodir=~/.vim/undodir
-set undofile
-set undolevels=100 "maximum number of changes that can be undone
-set undoreload=1000 "maximum number lines to save for undo on a buffer reload
-
-" Keep swap files out of ~/.vim (which is this repository)
-if !isdirectory($HOME . '/.cache/vim/swap')
-    call mkdir($HOME . '/.cache/vim/swap', 'p', 0700)
-endif
+" Keep swap and undo files out of ~/.vim (which is this repository)
+for s:dir in ['swap', 'undo']
+    if !isdirectory($HOME . '/.cache/vim/' . s:dir)
+        call mkdir($HOME . '/.cache/vim/' . s:dir, 'p', 0700)
+    endif
+endfor
 set directory=~/.cache/vim/swap//
+
+" Undo history between sessions
+set undodir=~/.cache/vim/undo
+set undofile
+set undolevels=1000 "maximum number of changes that can be undone
+set undoreload=1000 "save whole buffer for undo on reload, up to this many lines
 
 " Colored column (to see line size violations)
 set colorcolumn=80
