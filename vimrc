@@ -137,6 +137,9 @@ autocmd vimrc BufRead,BufNewFile *.phps set filetype=php
 " because vim-polyglot clears the filetypedetect group.
 autocmd vimrc BufRead,BufNewFile *.list set filetype=tex
 
+" Wrap long lines in prose files (.txt ends up as filetype txt.rst)
+autocmd vimrc FileType text,txt.rst,markdown setlocal wrap
+
 " Keep swap and undo files out of ~/.vim (which is this repository)
 for s:dir in ['swap', 'undo']
     if !isdirectory($HOME . '/.cache/vim/' . s:dir)
