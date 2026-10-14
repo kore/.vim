@@ -277,11 +277,13 @@ function! s:LspMappings()
     nnoremap <buffer> <silent> <leader>e <Cmd>LspDiag current<CR>
     nnoremap <buffer> <silent> ]d <Cmd>LspDiag nextWrap<CR>
     nnoremap <buffer> <silent> [d <Cmd>LspDiag prevWrap<CR>
-    " Complete with <Tab> after a word, indent with <Tab> everywhere else
-    inoremap <buffer> <expr> <Tab> <SID>TabComplete()
-    inoremap <buffer> <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+    " <Tab> completion asks the language server (see TabComplete below)
+    let b:tab_complete = "\<C-x>\<C-o>"
 endfunction
 
+" Complete with <Tab> after a word, indent with <Tab> everywhere else.
+" Uses the language server where one is running, words from open buffers
+" otherwise.
 function! s:TabComplete()
     if pumvisible()
         return "\<C-n>"
@@ -290,6 +292,8 @@ function! s:TabComplete()
     if l:col == 0 || getline('.')[l:col - 1] =~ '\s'
         return "\<Tab>"
     endif
-    return "\<C-x>\<C-o>"
+    return get(b:, 'tab_complete', "\<C-n>")
 endfunction
+inoremap <expr> <Tab> <SID>TabComplete()
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 autocmd vimrc User LspAttached call s:LspMappings()
